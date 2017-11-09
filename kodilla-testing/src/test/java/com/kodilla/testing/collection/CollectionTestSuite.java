@@ -1,6 +1,4 @@
 package com.kodilla.testing.collection;
-
-import com.sun.org.apache.xpath.internal.SourceTree;
 import org.junit.*;
 
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ public class CollectionTestSuite {
     }
 
     @Test
-    public void testOddNumbersExterminatorEmptyList() {
+    public void testOddNumbersExterminatorNormalList() {
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
         ArrayList<Integer> t = new ArrayList<>();
         t.add(1);
@@ -50,9 +48,15 @@ public class CollectionTestSuite {
 
     }
 
+    @Test
+    public void  testOddNumbersExterminatorEmptyList (){
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
+        ArrayList<Integer> t = new ArrayList<>();
 
+        ArrayList<Integer> t2 = oddNumbersExterminator.exterminate(t);
+
+        ArrayList<Integer> t3 = new ArrayList<>();
+
+        Assert.assertArrayEquals(t3.toArray(),t2.toArray());
+    }
 }
-
-
-//    testOddNumbersExterminatorEmptyList (sprawdzi czy klasa zachowuje się poprawnie gdy lista jest pusta)
-//    testOddNumbersExterminatorNormalList (sprawdzi czy klasa zachowuje się poprawnie gdy lista zawiera liczby parzyste i nieparzyste)
