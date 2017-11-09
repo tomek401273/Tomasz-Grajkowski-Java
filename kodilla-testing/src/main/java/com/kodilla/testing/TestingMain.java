@@ -5,4 +5,3 @@ public class TestingMain {
         System.out.println("Modul 6. wprowadzenie do testowania");
     }
 }
-//ssa

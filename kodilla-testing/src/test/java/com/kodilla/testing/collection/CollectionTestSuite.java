@@ -38,18 +38,15 @@ public class CollectionTestSuite {
         t.add(5);
         t.add(6);
 
-        ArrayList<Integer> t2 = new ArrayList<>();
-                oddNumbersExterminator.exterminate(t);
 
-    for(int i : t2){
-        System.out.println(t2.get(i));
-    }
-    ArrayList<Integer> t3 = new ArrayList<>();
-    t3.add(2);
-    t3.add(4);
-    t3.add(6);
+        ArrayList<Integer> t2 = oddNumbersExterminator.exterminate(t);
 
-    Assert.assertArrayEquals(t3.toArray(),t2.toArray());
+        ArrayList<Integer> t3 = new ArrayList<>();
+        t3.add(2);
+        t3.add(4);
+        t3.add(6);
+
+        Assert.assertArrayEquals(t3.toArray(), t2.toArray());
 
     }
 
