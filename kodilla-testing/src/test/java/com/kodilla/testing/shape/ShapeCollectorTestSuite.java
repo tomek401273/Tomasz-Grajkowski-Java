@@ -99,5 +99,30 @@ public class ShapeCollectorTestSuite {
         Assert.assertEquals(figure1, figure2, 0);
     }
 
+    @Test
+    public void testShowFigures1(){
+        ShapeCollector shapeCollector = new ShapeCollector();
+        Triangle triangle = new Triangle("triangle", 2, 3);
+        shapeCollector.addFigure(triangle);
+        double showFiguresPredicted = 3;
+        double showFigures= shapeCollector.showFigures();
+
+        Assert.assertEquals(showFiguresPredicted,showFigures,0);
+    }
+    @Test
+    public void testShowFigures2(){
+        ShapeCollector shapeCollector = new ShapeCollector();
+        Triangle triangle = new Triangle("triangle", 2, 3);
+        Square square1 = new Square("squere", 4);
+        Square square2 = new Square("squere", 2);
+        shapeCollector.addFigure(triangle);
+        shapeCollector.addFigure(square1);
+        shapeCollector.addFigure(square2);
+
+        double showFiguresPredicted = 23;
+        double showFigures= shapeCollector.showFigures();
+
+        Assert.assertEquals(showFiguresPredicted,showFigures,0);
+    }
 
 }
