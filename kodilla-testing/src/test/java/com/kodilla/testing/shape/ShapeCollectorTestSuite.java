@@ -66,10 +66,38 @@ public class ShapeCollectorTestSuite {
         Square squere2 = new Square("Squere1", 2);
         shapeCollector.addFigure(squere1);
         shapeCollector.addFigure(squere2);
-        int figure1 = 4;
-        int figure2 = shapeCollector.showFigure(0);
+        double figure1 = 4;
+        double figure2 = shapeCollector.showFigure(0);
 
-        Assert.assertEquals(figure1, figure2);
+        Assert.assertEquals(figure1, figure2, 0);
     }
+
+    @Test
+    public void testShowCircle() {
+        ShapeCollector shapeCollector = new ShapeCollector();
+        Circle circle1 = new Circle("Circle1", 2);
+        Circle circle2 = new Circle("Circle2", 2);
+        shapeCollector.addFigure(circle1);
+        shapeCollector.addFigure(circle2);
+        double figure1 = 12.56;
+        double figure2 = shapeCollector.showFigure(0);
+
+        Assert.assertEquals(figure1, figure2, 0);
+    }
+
+    @Test
+    public void testShowTriangle() {
+        ShapeCollector shapeCollector = new ShapeCollector();
+        Triangle triangle = new Triangle("Triangle1", 2, 3);
+        Triangle triangle2 = new Triangle("Triangle2", 3, 9);
+
+        shapeCollector.addFigure(triangle);
+        shapeCollector.addFigure(triangle2);
+        double figure1 = 3;
+        double figure2 = shapeCollector.showFigure(0);
+
+        Assert.assertEquals(figure1, figure2, 0);
+    }
+
 
 }

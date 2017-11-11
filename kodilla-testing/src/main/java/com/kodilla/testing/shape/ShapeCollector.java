@@ -20,7 +20,7 @@ public class ShapeCollector {
         return schapelist.get(n);
     }
 
-    public int showFigure(int n) {
+    public double showFigure(int n) {
         return schapelist.get(n).getField();
     }
 }
