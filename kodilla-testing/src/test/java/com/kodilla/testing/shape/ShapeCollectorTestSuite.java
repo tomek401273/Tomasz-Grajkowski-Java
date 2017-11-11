@@ -14,12 +14,12 @@ public class ShapeCollectorTestSuite {
     }
 
     @BeforeClass
-    public void beforeClass() {
+    public static void beforeClass() {
         System.out.println("Test suite begin!!!");
     }
 
     @AfterClass
-    public void afterClass() {
+    public static void afterClass() {
         System.out.println("Test suite end!!!");
     }
 
@@ -66,8 +66,8 @@ public class ShapeCollectorTestSuite {
         Square squere2 = new Square("Squere1", 2);
         shapeCollector.addFigure(squere1);
         shapeCollector.addFigure(squere2);
-        int figure1 = 10;
-        int figure2 =shapeCollector.showFigure().getField();
+        int figure1 = 4;
+        int figure2 = shapeCollector.showFigure(0);
 
         Assert.assertEquals(figure1, figure2);
     }
