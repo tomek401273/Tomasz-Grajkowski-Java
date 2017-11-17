@@ -30,6 +30,7 @@ public class StreamMain {
         theResult.entrySet().stream()
                 .map(entry -> entry.getKey() + ": " + entry.getValue())
                 .forEach(System.out::println);
+        System.out.println("Tomek tomek");
 
     }
 }
