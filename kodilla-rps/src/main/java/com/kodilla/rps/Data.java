@@ -1,35 +1,35 @@
 package com.kodilla.rps;
 
+import java.util.List;
+
 public interface Data {
     default int compere(int generetedNumber) {
 
-        System.out.println("you chose:" +getName());
-        if(generetedNumber==getIsWeekerThan()){
-            System.out.println("you win!!!");
-            System.out.println("Computer chosen: "+getIsStrongerthan());
+        if (generetedNumber == getIsWeekerThan().get(0)) {
+            System.out.println("Computer chosen: " + getIsStrongerthan());
+            return 3;
+        } else if (generetedNumber == getValue()) {
+            System.out.println("Computer chosen: " + getName());
+            return 2;
+        } else if (generetedNumber == getIsStrongerThan().get(0)) {
+            System.out.println("Computer chosen: " + getIsWeekerthan());
             return 1;
-        }
-        else if(generetedNumber==getValue()){
-            System.out.println("Remis");
-            System.out.println("Computer chosen: "+getName());
-        }
-        else if (generetedNumber==getIsStrongerThan()){
-            System.out.println("You lose !!!");
-            System.out.println("Computer chosen: "+getIsWeekerthan());
         }
         return 0;
     }
 
-     String getIsWeekerthan();
-
-     int getIsStrongerThan();
-
-     int getValue();
-
-     String getIsStrongerthan();
-
-     int getIsWeekerThan();
+    int getValue();
 
     String getName();
+
+    String getIsWeekerthan();
+
+    String getIsStrongerthan();
+
+    List<Integer> getIsStrongerThan();
+
+    List<Integer> getIsWeekerThan();
+
+
 
 }
