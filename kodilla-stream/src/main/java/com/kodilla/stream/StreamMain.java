@@ -15,8 +15,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 public class StreamMain {
     public static void main(String[] args) {
+
+        System.out.println("Poem Beautifiler");
+
+       PoemBeautifiler poemBeautifiler = new PoemBeautifiler();
+
+        poemBeautifiler.beautify("Computer", String::toUpperCase);
+        poemBeautifiler.beautify("lubie placki", (b) -> b.toUpperCase() + " " + b.toLowerCase() + " " + b.toUpperCase());
+        poemBeautifiler.beautify("Mouse", (c) -> "ABC" + c + "ABC");
+        poemBeautifiler.beautify("ABC", (d) -> d.substring(d.length() - 1) + d.substring(d.length() - 2) + d.substring(d.length() - 3));
 
         Forum forum = new Forum();
         Map<Integer, ForumUser> theResult = forum.getUserList().stream()
@@ -33,4 +43,6 @@ public class StreamMain {
         System.out.println("Tomek tomek");
 
     }
+
+
 }
