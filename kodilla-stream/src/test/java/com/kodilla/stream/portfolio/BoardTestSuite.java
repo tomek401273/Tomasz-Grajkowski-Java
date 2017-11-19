@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
 import static java.util.stream.Collectors.toList;
 
@@ -130,21 +131,19 @@ public class BoardTestSuite {
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
 
-        long sumTaksDuration = project.getTaskLists().stream()
+        project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(x -> x.getTasks().stream())
-                .map(task ->  LocalDate.now().getDayOfYear()- task.getCreated().getDayOfYear())
-                .reduce(0, (sum, current) -> sum = sum + current);
+                .map(task -> (LocalDate.now().getYear() + LocalDate.now().getDayOfYear()) - (task.getCreated().getYear() + task.getCreated().getDayOfYear()))
+                .forEach(System.out::println);
 
-        long countTask = project.getTaskLists().stream()
+        OptionalDouble taskDurationCalculated = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(x -> x.getTasks().stream())
-                .map(task -> LocalDate.now().getDayOfYear() - task.getCreated().getDayOfYear())
-                .count();
-        long taskDuration = sumTaksDuration / countTask;
-
-        //Then
-        Assert.assertEquals(10, taskDuration);
+                .mapToInt(task -> (LocalDate.now().getYear() + LocalDate.now().getDayOfYear()) - (task.getCreated().getYear() + task.getCreated().getDayOfYear()))
+                .average();
+        OptionalDouble taskDurationPredicted = OptionalDouble.of(10);
+        Assert.assertEquals(taskDurationPredicted,taskDurationCalculated);
 
     }
 }
