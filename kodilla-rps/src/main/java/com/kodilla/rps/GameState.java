@@ -3,7 +3,7 @@ package com.kodilla.rps;
 public class GameState {
     private int userWin = 0;
 
-    public int  game(int chossenNumber,int generetedNumber){
+    public int game(int chossenNumber, int generetedNumber, int victory){
 
         if (chossenNumber == 1) {
             Rock rock = new Rock();
@@ -19,15 +19,7 @@ public class GameState {
             System.out.println("you chose:" + paper.getName());
             userWin = paper.compere(generetedNumber);
         }
-        if(userWin==1){
-            System.out.println("You lose");
-        }
-        else if(userWin==2){
-            System.out.println("Remis");
-        }
-        else if(userWin ==3){
-            System.out.println("You win");
-        }
+
         return userWin;
     }
 
