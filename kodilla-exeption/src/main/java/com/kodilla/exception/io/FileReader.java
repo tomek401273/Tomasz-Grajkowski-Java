@@ -16,12 +16,13 @@ public class FileReader {
 
         Path path = Paths.get(file.getPath());
 
-        try( Stream<String> fileLines = Files.lines(Paths.get(String.valueOf(path)))) {
+        try( Stream<String> fileLines = Files.lines(Paths.get(file.getPath()))) {
 
 
             fileLines.forEach(System.out::println);
 
-        } catch (IOException e){
+        } catch (IOException e) {
+
             throw new FileReaderException();
 //            System.out.println("Oh no! Something went wrong "+e);
         } finally {
