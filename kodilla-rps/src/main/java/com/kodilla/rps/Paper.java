@@ -1,53 +1,24 @@
 package com.kodilla.rps;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Paper implements Data {
-    private int value = 3;
-    private String name = "paper";
-    private String isWeekerthan = "scissors";
-    private String isStrongerthan = "rock";
-
-    private int isWeekerThan = 2;
-    private int isStrongerThan = 1;
-
-    private List<Integer> isWeekerThanList = new ArrayList<>();
-    private List<Integer> isStrongerThanList = new ArrayList<>();
-
-    public Paper() {
-        this.isWeekerThanList.add(isWeekerThan);
-        this.isStrongerThanList.add(isStrongerThan);
-    }
-
-    @Override
-    public String getIsWeekerthan() {
-        return isWeekerthan;
-    }
-
-    @Override
-    public int getValue() {
-        return value;
-    }
-
-    @Override
-    public String getIsStrongerthan() {
-        return isStrongerthan;
-    }
 
     @Override
     public String getName() {
-        return name;
+        return "Paper";
     }
 
     @Override
-    public List<Integer> getIsStrongerThan() {
-        return isStrongerThanList;
+    public List<GameAttribute> getIsStrongerThan() {
+        return Arrays.asList(GameAttribute.Rock);
     }
 
     @Override
-    public List<Integer> getIsWeekerThan() {
-        return isWeekerThanList;
+    public List<GameAttribute> getIsWeekerThan() {
+        return Arrays.asList(GameAttribute.Scissors);
     }
 
 }

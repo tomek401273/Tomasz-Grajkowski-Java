@@ -3,29 +3,23 @@ package com.kodilla.rps;
 import java.util.List;
 
 public interface Data {
-    default int compere(int generetedNumber) {
-
-        if (generetedNumber == getIsWeekerThan().get(0)) {
-            return 1;
-        } else if (generetedNumber == getValue()) {
-            return 2;
-        } else if (generetedNumber == getIsStrongerThan().get(0)) {
-            return 3;
+    default GameResult compere(GameAttribute generetedAtribute) {
+        if (getIsStrongerThan().contains(generetedAtribute)){
+            return GameResult.fail;
         }
-        return 0;
+        if(getIsWeekerThan().contains(generetedAtribute)){
+            return GameResult.win;
+        }
+        return GameResult.draw;
     }
 
-    int getValue();
 
     String getName();
 
-    String getIsWeekerthan();
 
-    String getIsStrongerthan();
+    List<GameAttribute> getIsStrongerThan();
 
-    List<Integer> getIsStrongerThan();
-
-    List<Integer> getIsWeekerThan();
+    List<GameAttribute> getIsWeekerThan();
 
 
 

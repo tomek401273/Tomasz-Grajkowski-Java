@@ -1,71 +1,108 @@
 package com.kodilla.rps;
 
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Play {
     public void play() {
 
-        GenerateNumber generateNumber = new GenerateNumber();
+        //GenerateNumber generateNumber = new GenerateNumber();
+        GenerateAtribute generateAtribute = new GenerateAtribute();
+        generateAtribute.generete();
         Scanner sc = new Scanner(System.in);
-        int userWin = 0;
-        int winComputer = 0;
+
+        int actualUserScore = 0;
+        int actualComputerScore = 0;
         int win = 0;
         int victory = 0;
+        boolean incorectVicotry=false;
         String name = "";
-
+        boolean corectInputVicory = false;
+        boolean corectChose = false;
         boolean continueGame = true;
+        String usersChoice = null;
 
         while (continueGame) {
 
-            if (victory == 0) {
+            while (!corectInputVicory) {
                 System.out.println("Write your name");
                 name = sc.next();
-                System.out.println("How many rounds will be victory?");
-                victory = sc.nextInt();
-            }
+                if (victory == 0) {
 
+                    System.out.println("How many rounds will be victory?");
+
+                    try {
+                        victory = sc.nextInt();
+                    }catch (NoSuchElementException e){
+                        System.out.println("Please write number as amount vicory");
+                        incorectVicotry=true;
+                    }
+                      if(!incorectVicotry) {
+                          corectInputVicory = true;
+                      }
+                      else {
+                        incorectVicotry=false;
+                      }
+                    System.out.println();
+
+                }
+            }
 
             System.out.println("Your name is: " + name);
             System.out.println("Victory wiil be after: " + victory);
 
-            while (userWin < victory && winComputer < victory) {
+            while (actualUserScore < victory && actualComputerScore < victory) {
 
-                System.out.println("Chose number response thing: 1 Rock, 2 Scissors, 3 Paper");
-                int chossenNumber = sc.nextInt();
-                int generetedNumber = generateNumber.generete();
+                System.out.println("Select and write your chose 'Rock', 'Scissors' or 'Paper' ");
+               while(!corectChose) {
+                   try {
+                        usersChoice = sc.next();
+                   } catch (NoSuchElementException e) {
+                       System.out.println("Please insert corectChoose");
+                   }
+                   if(usersChoice.contains("Rock")||usersChoice.contains("Scissors")||usersChoice.contains("Paper")){
+                       corectChose = true;
+                   }
+                   else {
+                       System.out.println("Chose correct: 'Rock', 'Scissors' or 'Paper'");
+                   }
+               }
+               corectChose =false;
+                GameAttribute gameAttributeComp = generateAtribute.generete();
 
-                if (generetedNumber == 1) {
+                String finalUsersChoice = usersChoice;
+                GameAttribute gameAttributeUser = Arrays.stream(GameAttribute.values())
+                        .filter(gameAttribute1 -> gameAttribute1.name().equals(finalUsersChoice))
+                        .findFirst()
+                        .get();
+                System.out.println("Your choosen was: " + gameAttributeUser.name());
+                System.out.println("Computer choosen was: " + gameAttributeComp.name());
 
-                    System.out.println("Computer choosen: Rock");
-                } else if (generetedNumber == 2) {
-                    System.out.println("Computer choosen: Scissors");
-                } else if (generetedNumber == 3) {
-                    System.out.println("Computer choosen: Paper");
-                }
 
                 GameState gameState = new GameState();
-                win = gameState.game(chossenNumber, generetedNumber, victory);
-                if (win == 1) {
-                    System.out.println("You Lose!!!");
-                    winComputer++;
+                GameResult result = gameState.game(gameAttributeComp, gameAttributeUser);
+                System.out.println("Result game: " + result.name());
+
+                if (result.name().equals("win")) {
+                    actualUserScore++;
                 }
-                if (win == 2) {
-                    System.out.println("Remis!!!");
+                if (result.name().equals("fail")) {
+                    actualComputerScore++;
                 }
-                if (win == 3) {
-                    System.out.println("You winn!!!");
-                    userWin++;
+                if (result.name().equals("draw")) {
                 }
 
-                System.out.println("user win " + userWin);
-                System.out.println("winComputer: " + winComputer);
+                System.out.println("Actual User score " + actualUserScore);
+                System.out.println("Actual Computer score: " + actualComputerScore);
                 System.out.println();
             }
 
-            if(userWin==victory){
+            if (actualUserScore == victory) {
                 System.out.println("This session you win Congratulation");
             }
-            if (winComputer==victory){
+            if (actualComputerScore == victory) {
                 System.out.println("This session win computer. You are lost");
                 System.out.println("Try again");
             }
@@ -88,9 +125,9 @@ public class Play {
                 String runNewGame = sc.next();
                 if (runNewGame.equals("y")) {
                     System.out.println("you are starting new game");
-                    userWin = 0;
+                    actualUserScore = 0;
                     victory = 0;
-                    winComputer = 0;
+                    actualComputerScore = 0;
                 }
 
             }

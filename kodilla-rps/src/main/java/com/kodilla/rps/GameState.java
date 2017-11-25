@@ -1,26 +1,12 @@
 package com.kodilla.rps;
 
 public class GameState {
-    private int userWin = 0;
 
-    public int game(int chossenNumber, int generetedNumber, int victory){
 
-        if (chossenNumber == 1) {
-            Rock rock = new Rock();
-            System.out.println("you chose:" + rock.getName());
-            userWin = rock.compere(generetedNumber);
+    public GameResult game(GameAttribute chosenAtribute, GameAttribute generetedAttribute){
 
-        } else if (chossenNumber == 2) {
-            Scissors scissors = new Scissors();
-            System.out.println("you chose:" + scissors.getName());
-            userWin = scissors.compere(generetedNumber);
-        } else if (chossenNumber == 3) {
-            Paper paper = new Paper();
-            System.out.println("you chose:" + paper.getName());
-            userWin = paper.compere(generetedNumber);
-        }
-
-        return userWin;
+        Data data =chosenAtribute.getData();
+        return data.compere(generetedAttribute);
     }
 
 }
