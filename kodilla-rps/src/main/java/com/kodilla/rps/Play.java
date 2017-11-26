@@ -17,7 +17,7 @@ public class Play {
         int actualComputerScore = 0;
         int win = 0;
         int victory = 0;
-        boolean incorectVicotry=false;
+        boolean incorectVicotry = false;
         String name = "";
         boolean corectInputVicory = false;
         boolean corectChose = false;
@@ -35,16 +35,15 @@ public class Play {
 
                     try {
                         victory = sc.nextInt();
-                    }catch (NoSuchElementException e){
+                    } catch (NoSuchElementException e) {
                         System.out.println("Please write number as amount vicory");
-                        incorectVicotry=true;
+                        incorectVicotry = true;
                     }
-                      if(!incorectVicotry) {
-                          corectInputVicory = true;
-                      }
-                      else {
-                        incorectVicotry=false;
-                      }
+                    if (!incorectVicotry) {
+                        corectInputVicory = true;
+                    } else {
+                        incorectVicotry = false;
+                    }
                     System.out.println();
 
                 }
@@ -55,21 +54,35 @@ public class Play {
 
             while (actualUserScore < victory && actualComputerScore < victory) {
 
-                System.out.println("Select and write your chose 'Rock', 'Scissors' or 'Paper' ");
-               while(!corectChose) {
-                   try {
+                System.out.print("Select and write your chose: ");
+                for (GameAttribute gameAttribute : GameAttribute.values()) {
+                    System.out.print("'" + gameAttribute.name() + "' ");
+                }
+                System.out.println();
+
+                while (!corectChose) {
+                    try {
                         usersChoice = sc.next();
-                   } catch (NoSuchElementException e) {
-                       System.out.println("Please insert corectChoose");
-                   }
-                   if(usersChoice.contains("Rock")||usersChoice.contains("Scissors")||usersChoice.contains("Paper")){
-                       corectChose = true;
-                   }
-                   else {
-                       System.out.println("Chose correct: 'Rock', 'Scissors' or 'Paper'");
-                   }
-               }
-               corectChose =false;
+                    } catch (NoSuchElementException e) {
+                        System.out.println("Please insert corectChoose");
+                    }
+
+                    for (GameAttribute gameAttribute : GameAttribute.values()) {
+                        if (gameAttribute.name().equals(usersChoice)) {
+                            corectChose = true;
+                            break;
+                        }
+                    }
+
+                    System.out.print("Select and write your chose: ");
+                    for (GameAttribute gameAttribute : GameAttribute.values()) {
+                        System.out.print("'" + gameAttribute.name() + "' ");
+                    }
+                    System.out.println();
+
+
+                }
+                corectChose = false;
                 GameAttribute gameAttributeComp = generateAtribute.generete();
 
                 String finalUsersChoice = usersChoice;
@@ -85,14 +98,21 @@ public class Play {
                 GameResult result = gameState.game(gameAttributeComp, gameAttributeUser);
                 System.out.println("Result game: " + result.name());
 
-                if (result.name().equals("win")) {
+//                if (result.name().equals("win")) {
+//                    actualUserScore++;
+//                }
+//                if (result.name().equals("fail")) {
+//                    actualComputerScore++;
+//                }
+//                if (result.name().equals("draw")) {
+//                }
+                if(result.equals(GameResult.win)){
                     actualUserScore++;
                 }
-                if (result.name().equals("fail")) {
+                if(result.equals(GameResult.fail)){
                     actualComputerScore++;
                 }
-                if (result.name().equals("draw")) {
-                }
+
 
                 System.out.println("Actual User score " + actualUserScore);
                 System.out.println("Actual Computer score: " + actualComputerScore);
@@ -128,6 +148,8 @@ public class Play {
                     actualUserScore = 0;
                     victory = 0;
                     actualComputerScore = 0;
+                    corectInputVicory = false;
+
                 }
 
             }
