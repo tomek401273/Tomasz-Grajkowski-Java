@@ -9,4 +9,6 @@ public class GameState {
         return data.compere(generetedAttribute);
     }
 
+
+
 }
