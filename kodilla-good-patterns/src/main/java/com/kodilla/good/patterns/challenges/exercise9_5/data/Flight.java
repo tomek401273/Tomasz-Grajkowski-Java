@@ -29,4 +29,24 @@ public class Flight {
     public List<String> getTransitCity() {
         return transitCity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Flight)) return false;
+
+        Flight flight = (Flight) o;
+
+        if (startCity != null ? !startCity.equals(flight.startCity) : flight.startCity != null) return false;
+        if (finishCity != null ? !finishCity.equals(flight.finishCity) : flight.finishCity != null) return false;
+        return transitCity != null ? transitCity.equals(flight.transitCity) : flight.transitCity == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = startCity != null ? startCity.hashCode() : 0;
+        result = 31 * result + (finishCity != null ? finishCity.hashCode() : 0);
+        result = 31 * result + (transitCity != null ? transitCity.hashCode() : 0);
+        return result;
+    }
 }
