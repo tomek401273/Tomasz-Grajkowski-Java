@@ -20,13 +20,13 @@ public class BuyingProcessor {
     }
 
     public BoughtDto process(final BuyRequest buyRequest){
-        boolean isBought = availableService.createTransaction(buyRequest.buyer,buyRequest.transactionDate, buyRequest.price);
+        boolean isBought = availableService.createTransaction(buyRequest.getBuyer(),buyRequest.getTransactionDate(), buyRequest.getPrice());
         if(isBought) {
-            informationService.inform(buyRequest.buyer);
-            buyingRepository.createSale(buyRequest.buyer, buyRequest.transactionDate, buyRequest.price);
-            return new BoughtDto(buyRequest.buyer, true);
+            informationService.inform(buyRequest.getBuyer());
+            buyingRepository.createSale(buyRequest.getBuyer(), buyRequest.getTransactionDate(), buyRequest.getPrice());
+            return new BoughtDto(buyRequest.getBuyer(), true);
         } else {
-            return new BoughtDto(buyRequest.buyer, false);
+            return new BoughtDto(buyRequest.getBuyer(), false);
         }
     }
 
