@@ -14,11 +14,28 @@ public class GetNumberVictory implements State{
     }
 
     @Override
-    public boolean validadeUserChoice(String dane) {
+    public User validadeUserChoice(User user, String dane) {
+        User userTemp = user;
         if(numbernPattern.matcher(dane).matches()){
-            return true;
+            userTemp.setCorrectName(true);
+            userTemp.setVictory(Integer.parseInt(dane));
+
+
+            System.out.println("Get Numbers Vicory:   "+userTemp.getName()+"  Vicory will be after: "+userTemp.getVictory());
+            return userTemp;
         }
-        return false;
+        userTemp.setCorrectName(false);
+        return userTemp;
+    }
+
+    @Override
+    public User userGame(User user, String dane) {
+        User userTemp = new User();
+
+        //user.setVictory(Integer.parseInt(dane));
+
+        System.out.print(" vicory will be after: "+user.getVictory());
+        return null;
     }
 
     @Override

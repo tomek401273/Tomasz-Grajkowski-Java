@@ -12,9 +12,22 @@ public class GetNameState implements State{
     }
 
     @Override
-    public boolean validadeUserChoice(String dane) {
-        return !dane.equals("");
+    public User validadeUserChoice(User user,String dane) {
+        User userTemp = user;
+        userTemp.setCorrectName(!dane.equals(""));
+        userTemp.setName(dane);
+        System.out.println("Get Name State: "+userTemp.getName());
+        return userTemp;
     }
+
+    @Override
+    public User userGame(User user, String dane) {
+        user.setName(dane);
+        System.out.println("GetNameState:...."+user.getName());
+
+        return user;
+    }
+
 
     @Override
     public Map<Pattern, State> getsOptionsMap() {

@@ -23,7 +23,7 @@ public class Processor {
     }
 
     public FlightDto process (FlightRepository flightRepository) {
-        Flight flight = avaiableFlight.checkAvaiable(flightRepository.flightList());
+        Optional<Flight> flight = avaiableFlight.checkAvaiable(flightRepository.flightList());
         Flight flightNull = new Flight();
         try{
             if (!flight.equals(flightNull)) {

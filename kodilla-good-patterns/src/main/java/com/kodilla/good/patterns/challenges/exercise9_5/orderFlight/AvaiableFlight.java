@@ -3,12 +3,12 @@ package com.kodilla.good.patterns.challenges.exercise9_5.orderFlight;
 import com.kodilla.good.patterns.challenges.exercise9_5.data.Flight;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public interface AvaiableFlight {
     Flight data();
 
-    default public Flight checkAvaiable(List<Flight> flightList) {
+    default public Optional<Flight> checkAvaiable(List<Flight> flightList) {
         data();
         System.out.print("Checking avialable flight from " + data().getStartCity() + " to " + data().getFinishCity() + " ");
 
@@ -18,17 +18,15 @@ public interface AvaiableFlight {
         System.out.println();
 
         flightList.stream()
-                .filter(x -> x.getStartCity().equals(data().getStartCity()) && x.getFinishCity().equals(data().getFinishCity()) && x.getTransitCity().equals(data().getTransitCity()))
+                .filter(x -> x.equals(data()))
                 .map(y -> y.getStartCity() + y.getTransitCity() + y.getFinishCity())
                 .forEach(System.out::println);
 
-        List<Flight> flightList2 = flightList.stream()
-                .filter(x -> x.getStartCity().equals(data().getStartCity()) && x.getFinishCity().equals(data().getFinishCity()) && x.getTransitCity().equals(data().getTransitCity()))
-                .collect(Collectors.toList());
+        Optional<Flight> flight = Optional.of(new Flight());
+        flight = flightList.stream()
+                .filter(x -> x.equals(data()))
+                .findFirst();
 
-        if (!flightList2.isEmpty()) {
-            return flightList2.get(0);
-        }
-        return null;
+        return flight;
     }
 }
