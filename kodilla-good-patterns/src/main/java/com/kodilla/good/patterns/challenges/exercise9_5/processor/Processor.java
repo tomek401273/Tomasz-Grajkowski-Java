@@ -7,6 +7,7 @@ import com.kodilla.good.patterns.challenges.exercise9_5.orderFlight.AvaiableFlig
 import com.kodilla.good.patterns.challenges.exercise9_5.orderFlight.InformationService;
 import com.kodilla.good.patterns.challenges.exercise9_5.orderFlight.OrderFlight;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Processor {
@@ -22,10 +23,20 @@ public class Processor {
         this.orderFlight = orderFlight;
     }
 
-    public FlightDto process (FlightRepository flightRepository) {
+    public FlightDto process(FlightRepository flightRepository) {
         Optional<Flight> maybyFlight = avaiableFlight.checkAvaiable(flightRepository.flightList());
 
-
+        maybyFlight.map(flight -> {
+            boolean isOrdered = orderFlight.order(maybyFlight);
+            if (isOrdered) {
+                informationService.info();
+            }
+            return null;
+        })
+                .orElseGet(() -> {
+                    System.out.println("We do not have available flight with this paramethers");
+                    return null;
+                });
 
         return null;
     }
