@@ -1,12 +1,17 @@
 package com.kodilla.rps.state;
 
-import com.kodilla.rps.User;
+import com.kodilla.rps.GameContext;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Summary implements State {
+    GameContext gameContext;
+    public Summary(GameContext gameContext) {
+        this.gameContext = gameContext;
+    }
+
     @Override
     public void writeMessage() {
         System.out.println("This session game is end");
@@ -16,17 +21,19 @@ public class Summary implements State {
     }
 
     @Override
-    public User validadeUserChoice(User user, String dane) {
-        User userTemp = user;
-        userTemp.setCorrectData(true);
-        return userTemp;
+    public boolean validadeUserChoice(String dane) {
+
+        if (dane.equals("n") || dane.equals("x")){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Map<Pattern, State> getsOptionsMap() {
         Map<Pattern, State> patternStateMap = new HashMap<>();
-        patternStateMap.put(Pattern.compile("n"),new NewGame());
-        patternStateMap.put(Pattern.compile("x"),new EndGame());
+        patternStateMap.put(Pattern.compile("n"),new NewGame(gameContext));
+        patternStateMap.put(Pattern.compile("x"),new EndGame(gameContext));
         return patternStateMap;
     }
 }

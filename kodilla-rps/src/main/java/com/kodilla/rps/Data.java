@@ -13,9 +13,7 @@ public interface Data {
         return GameResult.draw;
     }
 
-
     String getName();
-
 
     List<GameAttribute> getIsStrongerThan();
 

@@ -1,8 +1,6 @@
 package com.kodilla.rps.state;
 
 import com.kodilla.rps.*;
-import com.kodilla.rps.state.GetNumberVictory;
-import com.kodilla.rps.state.State;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -12,6 +10,12 @@ public class GetUserAttribute implements State {
     int actualUserScore = 0;
     int actualComputerScore = 0;
     int victory;
+    GameContext gameContext;
+    boolean correctData;
+
+    public GetUserAttribute(GameContext gameContext) {
+        this.gameContext = gameContext;
+    }
 
     @Override
     public void writeMessage() {
@@ -23,71 +27,68 @@ public class GetUserAttribute implements State {
     }
 
     @Override
-    public User validadeUserChoice(User user, String dane) {
-        User userTemp = user;
-        userTemp.setCorrectData(false);
-        System.out.println("Number victory: " + userTemp.getVictory());
-        victory = userTemp.getVictory();
+    public boolean validadeUserChoice(String dane) {
+        gameContext.setCorrectData(false);
+        System.out.println("Number victory: " + gameContext.getVictory());
+        victory = gameContext.getVictory();
         for (GameAttribute gameAttribute : GameAttribute.values()) {
 
             if (gameAttribute.name().equals(dane)) {
-                userTemp.setUserAtribute(gameAttribute);
-                userTemp.setCorrectData(true);
+                gameContext.setUserAtribute(gameAttribute);
+                gameContext.setCorrectData(true);
                 break;
             }
 
         }
-        if (!userTemp.isCorrectData()) {
-            return userTemp;
+        if (!gameContext.isCorrectData()) {
+            return false;
         }
 
-        User userTemp2 = game(userTemp);
+        boolean goodData = game(gameContext);
 
-        return userTemp2;
+        return goodData;
     }
 
     @Override
     public Map<Pattern, State> getsOptionsMap() {
-        return Collections.singletonMap(Pattern.compile(".*"), new Summary());
+        return Collections.singletonMap(Pattern.compile(".*"), new Summary(gameContext));
     }
 
-    public User game(User user) {
-
-        User userTemp = user;
+    public boolean game(GameContext gameContext) {
 
         GenerateAtribute generateAtribute = new GenerateAtribute();
         GameAttribute computerAtteibute = generateAtribute.generete();
-        userTemp.setComputerAtribute(computerAtteibute);
+        gameContext.setComputerAtribute(computerAtteibute);
 
-        System.out.println("You select: " + userTemp.getUserAtribute());
-        System.out.println("Computer select: " + userTemp.getComputerAtribute());
+        System.out.println("You select: " + gameContext.getUserAtribute());
+        System.out.println("Computer select: " + gameContext.getComputerAtribute());
 
         GameState gameState = new GameState();
-        GameResult result = gameState.game(userTemp.getComputerAtribute(), userTemp.getUserAtribute());
+        GameResult result = gameState.game(gameContext.getComputerAtribute(), gameContext.getUserAtribute());
         System.out.println("Game Result: " + result.name());
 
         ActualGameResult actualGameResult = new ActualGameResult(result);
         actualUserScore = actualUserScore + actualGameResult.getActualUserScore();
         actualComputerScore = actualComputerScore + actualGameResult.getActualComputerScore();
-        userTemp.setActualUserScore(actualUserScore);
-        userTemp.setActualComputerScore(actualComputerScore);
+        gameContext.setActualUserScore(actualUserScore);
+        gameContext.setActualComputerScore(actualComputerScore);
 
-        System.out.println("Actual user score is: " + userTemp.getActualUserScore());
-        System.out.println("Actual computer score is: " + userTemp.getActualComputerScore());
+        System.out.println("Actual gameContext score is: " + gameContext.getActualUserScore());
+        System.out.println("Actual computer score is: " + gameContext.getActualComputerScore());
 
-        if (userTemp.getActualUserScore() < victory && userTemp.getActualComputerScore() < victory) {
-            System.out.println("Computer Score is less than victory or user score is less than victory");
-            userTemp.setCorrectData(false);
+        if (gameContext.getActualUserScore() < victory && gameContext.getActualComputerScore() < victory) {
+            System.out.println("Computer Score is less than victory or gameContext score is less than victory");
+            correctData=false;
         } else {
-            userTemp.setCorrectData(true);
-            if (userTemp.getActualUserScore() > userTemp.getActualComputerScore()) {
-                System.out.println("Congratulation " + userTemp.getName() + " you are winn ");
+            correctData =true;
+            if (gameContext.getActualUserScore() > gameContext.getActualComputerScore()) {
+                System.out.println("Congratulation " + gameContext.getName() + " you are winn ");
             } else {
-                System.out.println(userTemp.getName() + " this session you are lost");
+                System.out.println(gameContext.getName() + " this session you are lost");
             }
         }
 
-        return user;
+        return correctData;
     }
 
 }

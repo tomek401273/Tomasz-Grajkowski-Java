@@ -23,19 +23,9 @@ public class Processor {
     }
 
     public FlightDto process (FlightRepository flightRepository) {
-        Optional<Flight> flight = avaiableFlight.checkAvaiable(flightRepository.flightList());
-        Flight flightNull = new Flight();
-        try{
-            if (!flight.equals(flightNull)) {
-                boolean isOrdered = orderFlight.order(flight);
-                if (isOrdered) {
-                    informationService.info();
-                }
-            }
+        Optional<Flight> maybyFlight = avaiableFlight.checkAvaiable(flightRepository.flightList());
 
-        } catch (NullPointerException e){
-            System.out.println("We do not have available flight with this paramethers");
-        }
+
 
         return null;
     }

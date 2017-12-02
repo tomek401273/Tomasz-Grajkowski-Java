@@ -1,12 +1,17 @@
 package com.kodilla.rps.state;
 
-import com.kodilla.rps.User;
+import com.kodilla.rps.GameContext;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public class GetNameState implements State {
+    GameContext gameContext;
+
+    public GetNameState(GameContext gameContext) {
+        this.gameContext = gameContext;
+    }
 
     @Override
     public void writeMessage() {
@@ -14,16 +19,14 @@ public class GetNameState implements State {
     }
 
     @Override
-    public User validadeUserChoice(User user, String dane) {
-        User userTemp = user;
-        userTemp.setCorrectData(!dane.equals(""));
-        userTemp.setName(dane);
-        System.out.println("Get Name State: "+userTemp.getName());
-        return userTemp;
+    public boolean validadeUserChoice(String dane) {
+        gameContext.setName(dane);
+        System.out.println("Get Name State: "+ gameContext.getName());
+        return !dane.equals("");
     }
 
     @Override
     public Map<Pattern, State> getsOptionsMap() {
-        return  Collections.singletonMap(Pattern.compile(".*"),new GetNumberVictory());
+        return  Collections.singletonMap(Pattern.compile(".*"),new GetNumberVictory(gameContext));
     }
 }

@@ -27,9 +27,4 @@ public class ActualGameResult {
     public int getActualComputerScore() {
         return actualComputerScore;
     }
-    public void writeActualGameResult(int userScore, int computerScore) {
-        System.out.println("Actual User score " + userScore);
-        System.out.println("Actual Computer score: " + computerScore);
-        System.out.println();
-    }
 }

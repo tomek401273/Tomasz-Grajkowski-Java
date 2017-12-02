@@ -1,12 +1,17 @@
 package com.kodilla.rps.state;
 
-import com.kodilla.rps.User;
+import com.kodilla.rps.GameContext;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public class GetNumberVictory implements State {
+    GameContext gameContext;
+
+    public GetNumberVictory(GameContext gameContext) {
+        this.gameContext = gameContext;
+    }
 
     Pattern numbernPattern = Pattern.compile("\\d+");
 
@@ -16,22 +21,19 @@ public class GetNumberVictory implements State {
     }
 
     @Override
-    public User validadeUserChoice(User user, String dane) {
-        User userTemp = user;
+    public boolean validadeUserChoice(String dane) {
         if(numbernPattern.matcher(dane).matches()){
-            userTemp.setCorrectData(true);
-            userTemp.setVictory(Integer.parseInt(dane));
+            gameContext.setVictory(Integer.parseInt(dane));
 
-            System.out.println("Get Numbers Vicory: "+userTemp.getName()+"  Vicory will be after: "+userTemp.getVictory());
-            return userTemp;
+            System.out.println("Get Numbers Vicory: "+ gameContext.getName()+"  Vicory will be after: "+ gameContext.getVictory());
+            return true;
         }
-        userTemp.setCorrectData(false);
-        return userTemp;
+        return false;
     }
 
     @Override
     public Map<Pattern, State> getsOptionsMap() {
-        return Collections.singletonMap(numbernPattern,new GetUserAttribute());
+        return Collections.singletonMap(numbernPattern,new GetUserAttribute(gameContext));
 
     }
 }
