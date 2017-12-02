@@ -3,7 +3,13 @@ package com.kodilla.rps;
 public class User {
     private String name;
     private int victory;
-    private boolean correctName;
+    private boolean correctData;
+    private GameAttribute userAtribute;
+    private GameAttribute computerAtribute;
+    private int actualUserScore;
+    private int actualComputerScore;
+    private boolean totalUserWin;
+
 
     public User() {
     }
@@ -24,11 +30,51 @@ public class User {
         this.victory = victory;
     }
 
-    public boolean isCorrectName() {
-        return correctName;
+    public boolean isCorrectData() {
+        return correctData;
     }
 
-    public void setCorrectName(boolean correctName) {
-        this.correctName = correctName;
+    public void setCorrectData(boolean correctData) {
+        this.correctData = correctData;
+    }
+
+    public GameAttribute getUserAtribute() {
+        return userAtribute;
+    }
+
+    public void setUserAtribute(GameAttribute userAtribute) {
+        this.userAtribute = userAtribute;
+    }
+
+    public GameAttribute getComputerAtribute() {
+        return computerAtribute;
+    }
+
+    public void setComputerAtribute(GameAttribute computerAtribute) {
+        this.computerAtribute = computerAtribute;
+    }
+
+    public int getActualUserScore() {
+        return actualUserScore;
+    }
+
+    public int getActualComputerScore() {
+        return actualComputerScore;
+    }
+
+    public void setActualUserScore(int actualUserScore) {
+        this.actualUserScore = actualUserScore;
+    }
+
+    public void setActualComputerScore(int actualComputerScore) {
+        this.actualComputerScore = actualComputerScore;
+    }
+
+    public boolean isTotalUserWin() {
+        return totalUserWin;
+    }
+
+    public void setTotalUserWin(boolean totalUserWin) {
+        this.totalUserWin = totalUserWin;
     }
 }

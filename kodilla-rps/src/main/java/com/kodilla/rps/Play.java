@@ -1,21 +1,22 @@
 package com.kodilla.rps;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import com.kodilla.rps.state.GetNameState;
+import com.kodilla.rps.state.State;
 
 public class Play {
     public void play() {
 
         State state = new GetNameState();
-
-        do {
-            state = state.process(state);
+        try{
+            do {
+                state = state.process(state);
+            }
+            while (!state.equals(null));
+        }catch (NullPointerException e){
+            System.out.println("Exit Exit");
         }
-        while (!state.equals(null));
 
-
+        System.out.println("YOU are now exit game !!!");
 //
 //        GenerateAtribute generateAtribute = new GenerateAtribute();
 //        generateAtribute.generete();
@@ -62,7 +63,7 @@ public class Play {
 //
 //                ActualGameResult actualGameResult = new ActualGameResult(result);
 //
-//                actualUserScore = +actualUserScore + actualGameResult.getActualUserScore();
+//                actualUserScore = actualUserScore + actualGameResult.getActualUserScore();
 //                actualComputerScore = actualComputerScore + actualGameResult.getActualComputerScore();
 //
 //                actualGameResult.writeActualGameResult(actualUserScore, actualComputerScore);
