@@ -19,7 +19,7 @@ public class CalculatorTestSuite {
         //When
         double result = calculator.add(2, 3);
         //Then
-        Assert.assertEquals(result, 5.0, 0.1);
+        Assert.assertEquals(5, result, 0.1);
     }
     @Test
     public void testSub() {
@@ -29,7 +29,7 @@ public class CalculatorTestSuite {
         //When
         double result = calculator.sub(2, 3);
         //Then
-        Assert.assertEquals(result, -1.0, 0.1);
+        Assert.assertEquals(-1.0, result, 0.1);
     }
     @Test
     public void testMul() {
@@ -39,7 +39,7 @@ public class CalculatorTestSuite {
         //When
         double result = calculator.mul(2, 3);
         //Then
-        Assert.assertEquals(result, 6.0, 0.1);
+        Assert.assertEquals(6.0, result, 0.1);
     }
     @Test
     public void testDiv() {
@@ -49,6 +49,6 @@ public class CalculatorTestSuite {
         //When
         double result = calculator.div(6, 3);
         //Then
-        Assert.assertEquals(result, 2.0, 0.1);
+        Assert.assertEquals(2.0, result, 0.1);
     }
 }
