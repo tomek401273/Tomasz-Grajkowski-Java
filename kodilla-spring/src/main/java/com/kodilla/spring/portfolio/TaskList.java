@@ -6,8 +6,8 @@ import java.util.List;
 public class TaskList {
     private List<String> tasks;
 
-    public TaskList( List<String> task) {
-        this.tasks= task;
+    public TaskList(List<String> task) {
+        this.tasks = task;
     }
 
 

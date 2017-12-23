@@ -16,7 +16,7 @@ public class BoardConfig {
     TaskList toDoList;
 
     @Bean(name = "toDoList")
-    @Scope("prototype")
+    @Scope("singleton")
     public TaskList getToDoList() {
         List<String> toDoList = new ArrayList<>();
         toDoList.add("make Transaction");
@@ -29,7 +29,7 @@ public class BoardConfig {
     TaskList inProgressList;
 
     @Bean(name = "inProgressList")
-    @Scope("prototype")
+    @Scope("singleton")
     public TaskList getInProgressList() {
         List<String> inProgressList = new ArrayList<>();
         inProgressList.add("Coding");
@@ -42,7 +42,7 @@ public class BoardConfig {
     TaskList doneList;
 
     @Bean(name = "doneList")
-    @Scope("prototype")
+    @Scope("singleton")
     public TaskList getDoneList() {
         List<String> doneList = new ArrayList<>();
         doneList.add("relax");
