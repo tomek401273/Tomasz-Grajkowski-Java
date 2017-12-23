@@ -15,29 +15,30 @@ public class BoardTestSuite {
         ApplicationContext context = new AnnotationConfigApplicationContext(BoardConfig.class);
         Board board = context.getBean(Board.class);
         //When
-        board.addTaskToDoList("play game");
-        board.readToDoList();
+        board.toDoList.addTask("play game");
         List<String> toDoList = new ArrayList<>();
         toDoList.add("make Transaction");
         toDoList.add("cook Diner");
         toDoList.add("play game");
         //Then
-        Assert.assertEquals(toDoList, board.getToDoList().tasks);
+        System.out.println("toDoList" + board.toDoList.getTasks());
+        Assert.assertEquals(toDoList, board.toDoList.getTasks());
     }
+
     @Test
     public void testInProgressList() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext(BoardConfig.class);
         Board board = context.getBean(Board.class);
-        board.addTaskInProgressList("cleaning");
-        board.readInProgressList();
         //When
+        board.inProgressList.addTask("cleaning");
         List<String> inProgressList = new ArrayList<>();
         inProgressList.add("Coding");
         inProgressList.add("Programming");
         inProgressList.add("cleaning");
         //Then
-        Assert.assertEquals(inProgressList, board.getInProgressList().tasks);
+        System.out.println("inProgressList: "+board.inProgressList.getTasks());
+        Assert.assertEquals(inProgressList, board.inProgressList.getTasks());
     }
 
     @Test
@@ -45,14 +46,14 @@ public class BoardTestSuite {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext(BoardConfig.class);
         Board board = context.getBean(Board.class);
-        board.addTaskDoneList("lerning java");
-        board.readDoneList();
         //When
+        board.doneList.addTask("lerning java");
         List<String> doneList = new ArrayList<>();
         doneList.add("relax");
         doneList.add("watch TV");
         doneList.add("lerning java");
         //Then
-        Assert.assertEquals(doneList,board.getDoneList().tasks);
+        System.out.println("doneList: "+board.doneList.getTasks());
+        Assert.assertEquals(doneList,board.doneList.getTasks());
     }
 }

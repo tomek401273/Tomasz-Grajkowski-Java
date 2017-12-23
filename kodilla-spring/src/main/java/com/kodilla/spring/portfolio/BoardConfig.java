@@ -11,25 +11,39 @@ import java.util.List;
 
 @Configuration
 public class BoardConfig {
+    @Autowired
+    @Qualifier("toDoList")
+    TaskList toDoList;
 
-    @Bean
-    public TaskList toDoList() {
+    @Bean(name = "toDoList")
+    @Scope("prototype")
+    public TaskList getToDoList() {
         List<String> toDoList = new ArrayList<>();
         toDoList.add("make Transaction");
         toDoList.add("cook Diner");
         return new TaskList(toDoList);
     }
 
-    @Bean
-    public TaskList inProgress() {
-        List<String> inProgress = new ArrayList<>();
-        inProgress.add("Coding");
-        inProgress.add("Programming");
-        return new TaskList(inProgress);
+    @Autowired
+    @Qualifier("inProgressList")
+    TaskList inProgressList;
+
+    @Bean(name = "inProgressList")
+    @Scope("prototype")
+    public TaskList getInProgressList() {
+        List<String> inProgressList = new ArrayList<>();
+        inProgressList.add("Coding");
+        inProgressList.add("Programming");
+        return new TaskList(inProgressList);
     }
 
-    @Bean
-    public TaskList doneList() {
+    @Autowired
+    @Qualifier("doneList")
+    TaskList doneList;
+
+    @Bean(name = "doneList")
+    @Scope("prototype")
+    public TaskList getDoneList() {
         List<String> doneList = new ArrayList<>();
         doneList.add("relax");
         doneList.add("watch TV");
@@ -37,7 +51,9 @@ public class BoardConfig {
     }
 
     @Bean
-    public Board board() {
-        return new Board(toDoList(), inProgress(), doneList());
+    public Board getBoard() {
+        return new Board(toDoList, inProgressList, doneList);
     }
+
+
 }
