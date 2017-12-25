@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LibraryTestSuite {
 
     @Test
-    public void testGetBook() {
+    public void testGetBook() throws CloneNotSupportedException {
         //given
         Library lib = new Library("myLib");
 
@@ -19,19 +19,14 @@ public class LibraryTestSuite {
         Library shallowCloneLibrary = null;
         Book book = new Book("Tilte20","Author",LocalDate.now());
         lib.getBooks().add(book);
-        try{
-            shallowCloneLibrary= lib.shallowCopy();
-            shallowCloneLibrary.setName("Project number 2");
-        } catch (CloneNotSupportedException e) {
-            System.out.println(e);
-        }
+        shallowCloneLibrary= lib.shallowCopy();
+        shallowCloneLibrary.setName("Project number 2");
+
         Library deepCloneLibrary =null;
-        try {
-            deepCloneLibrary = lib.deepCopy();
-            deepCloneLibrary.setName("Project 3");
-        } catch (CloneNotSupportedException e) {
-            System.out.println(e);
-        }
+
+        deepCloneLibrary = lib.deepCopy();
+        deepCloneLibrary.setName("Project 3");
+
         //When
         lib.getBooks().remove(book);
         //Then
