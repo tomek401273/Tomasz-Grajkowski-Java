@@ -1,9 +1,6 @@
 package com.kodilla.patterns.builder;
 
-import com.kodilla.patterns.builder.bigmac.Bigmac;
-import com.kodilla.patterns.builder.bigmac.Ingredients;
-import com.kodilla.patterns.builder.bigmac.Roll;
-import com.kodilla.patterns.builder.bigmac.Sauce;
+import com.kodilla.patterns.builder.bigmac.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,44 +10,45 @@ import java.util.List;
 public class TestBigmacSuite {
     @Test
     public void createBigMac() {
-        //Given
+
         Bigmac bigmac = new Bigmac.BigmacBuilder()
-                .roll(Roll.onSesame)
+                .roll(Rol.roolWithsesame.getRoll())
                 .burgers(2)
-                .sauce(Sauce.sauce100Wysp)
-                .ingredient(Ingredients.bacon)
-                .ingredient(Ingredients.cheese)
-                .ingredient(Ingredients.chiliPeppers)
-                .ingredient(Ingredients.cucumber)
-                .ingredient(Ingredients.lettuce)
-                .ingredient(Ingredients.onion)
-                .ingredient(Ingredients.shrips)
-                .ingredient(Ingredients.mushroms)
+                .sauce(Sauce.sauce1000Inlands.getSauce())
+                .ingredient(Ingrediets.bacon.getIngredient())
+                .ingredient(Ingrediets.cheese.getIngredient())
+                .ingredient(Ingrediets.chiliPepers.getIngredient())
+                .ingredient(Ingrediets.cucumber.getIngredient())
+                .ingredient(Ingrediets.lettuce.getIngredient())
+                .ingredient(Ingrediets.onion.getIngredient())
+                .ingredient(Ingrediets.strips.getIngredient())
+                .ingredient(Ingrediets.mushroms.getIngredient())
                 .build();
         System.out.println(bigmac.toString());
         //When
-        Roll roll = new Roll(bigmac.getRoll());
+        String rol = bigmac.getRoll();
         int burgers = bigmac.getBurgers();
-        Sauce sauce = new Sauce(bigmac.getSauce());
-        Ingredients ingredients = new Ingredients(bigmac.getIngredients());
+        String sauce = bigmac.getSauce();
+        List<String> ingredients = bigmac.getIngredients();
 
-        String rollExpected = "roll with sesame";
+        String rollExpected = Rol.roolWithsesame.getRoll();
         int burgersExpected = 2;
-        String sauceExpected = "Sauce 1000 Wysp";
+        String sauceExpected = Sauce.sauce1000Inlands.getSauce();
         List<String> ingredientsExpected = new ArrayList<>();
-        ingredientsExpected.add(Ingredients.bacon);
-        ingredientsExpected.add(Ingredients.cheese);
-        ingredientsExpected.add(Ingredients.chiliPeppers);
-        ingredientsExpected.add(Ingredients.cucumber);
-        ingredientsExpected.add(Ingredients.lettuce);
-        ingredientsExpected.add(Ingredients.onion);
-        ingredientsExpected.add(Ingredients.shrips);
-        ingredientsExpected.add(Ingredients.mushroms);
+        ingredientsExpected.add(Ingrediets.bacon.getIngredient());
+        ingredientsExpected.add(Ingrediets.cheese.getIngredient());
+        ingredientsExpected.add(Ingrediets.chiliPepers.getIngredient());
+        ingredientsExpected.add(Ingrediets.cucumber.getIngredient());
+        ingredientsExpected.add(Ingrediets.lettuce.getIngredient());
+        ingredientsExpected.add(Ingrediets.onion.getIngredient());
+        ingredientsExpected.add(Ingrediets.strips.getIngredient());
+        ingredientsExpected.add(Ingrediets.mushroms.getIngredient());
 
-        Assert.assertEquals(rollExpected,roll.getRoll());
+
+        Assert.assertEquals(rollExpected,rol);
         Assert.assertEquals(burgersExpected,burgers);
-        Assert.assertEquals(sauceExpected,sauce.getSouce());
-        Assert.assertEquals(ingredientsExpected,ingredients.getIngredients());
+        Assert.assertEquals(sauceExpected,sauce);
+        Assert.assertEquals(ingredientsExpected,ingredients);
 
     }
 }
