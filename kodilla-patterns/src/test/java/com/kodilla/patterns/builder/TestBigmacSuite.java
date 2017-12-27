@@ -12,37 +12,37 @@ public class TestBigmacSuite {
     public void createBigMac() {
 
         Bigmac bigmac = new Bigmac.BigmacBuilder()
-                .roll(Rol.roolWithsesame.getRoll())
+                .roll(Rol.roolWithsesame)
                 .burgers(2)
-                .sauce(Sauce.sauce1000Inlands.getSauce())
-                .ingredient(Ingrediets.bacon.getIngredient())
-                .ingredient(Ingrediets.cheese.getIngredient())
-                .ingredient(Ingrediets.chiliPepers.getIngredient())
-                .ingredient(Ingrediets.cucumber.getIngredient())
-                .ingredient(Ingrediets.lettuce.getIngredient())
-                .ingredient(Ingrediets.onion.getIngredient())
-                .ingredient(Ingrediets.strips.getIngredient())
-                .ingredient(Ingrediets.mushroms.getIngredient())
+                .sauce(Sauce.sauce1000Inlands)
+                .ingredient(Ingrediets.bacon)
+                .ingredient(Ingrediets.cheese)
+                .ingredient(Ingrediets.chiliPepers)
+                .ingredient(Ingrediets.cucumber)
+                .ingredient(Ingrediets.lettuce)
+                .ingredient(Ingrediets.onion)
+                .ingredient(Ingrediets.strips)
+                .ingredient(Ingrediets.mushroms)
                 .build();
         System.out.println(bigmac.toString());
         //When
-        String rol = bigmac.getRoll();
+        Rol rol = bigmac.getRol();
         int burgers = bigmac.getBurgers();
-        String sauce = bigmac.getSauce();
-        List<String> ingredients = bigmac.getIngredients();
+        Sauce sauce = bigmac.getSauce();
+        List<Ingrediets> ingredients = bigmac.getIngrediets();
 
-        String rollExpected = Rol.roolWithsesame.getRoll();
+        Rol rollExpected = Rol.roolWithsesame;
         int burgersExpected = 2;
-        String sauceExpected = Sauce.sauce1000Inlands.getSauce();
-        List<String> ingredientsExpected = new ArrayList<>();
-        ingredientsExpected.add(Ingrediets.bacon.getIngredient());
-        ingredientsExpected.add(Ingrediets.cheese.getIngredient());
-        ingredientsExpected.add(Ingrediets.chiliPepers.getIngredient());
-        ingredientsExpected.add(Ingrediets.cucumber.getIngredient());
-        ingredientsExpected.add(Ingrediets.lettuce.getIngredient());
-        ingredientsExpected.add(Ingrediets.onion.getIngredient());
-        ingredientsExpected.add(Ingrediets.strips.getIngredient());
-        ingredientsExpected.add(Ingrediets.mushroms.getIngredient());
+        Sauce sauceExpected = Sauce.sauce1000Inlands;
+        List<Ingrediets> ingredientsExpected = new ArrayList<>();
+        ingredientsExpected.add(Ingrediets.bacon);
+        ingredientsExpected.add(Ingrediets.cheese);
+        ingredientsExpected.add(Ingrediets.chiliPepers);
+        ingredientsExpected.add(Ingrediets.cucumber);
+        ingredientsExpected.add(Ingrediets.lettuce);
+        ingredientsExpected.add(Ingrediets.onion);
+        ingredientsExpected.add(Ingrediets.strips);
+        ingredientsExpected.add(Ingrediets.mushroms);
 
 
         Assert.assertEquals(rollExpected,rol);
