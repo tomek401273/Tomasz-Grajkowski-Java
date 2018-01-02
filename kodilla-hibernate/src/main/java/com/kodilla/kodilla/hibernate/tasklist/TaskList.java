@@ -1,14 +1,19 @@
 package com.kodilla.kodilla.hibernate.tasklist;
 
+import com.kodilla.kodilla.hibernate.task.Task;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TASKLIST")
 public class TaskList {
-    int id;
-    String listName;
-    String description;
+    private int id;
+    private String listName;
+    private String description;
+    private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {
     }
