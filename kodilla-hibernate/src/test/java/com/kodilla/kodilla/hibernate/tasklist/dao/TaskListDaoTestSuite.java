@@ -21,6 +21,7 @@ public class TaskListDaoTestSuite {
     public void testFindByListName() {
         //Given
         TaskList taskList = new TaskList(LISTNAME, "taskToDoFirstOtherTasks");
+        int id = taskList.getId();
 
         //When
         taskListDao.save(taskList);
@@ -32,7 +33,7 @@ public class TaskListDaoTestSuite {
         Assert.assertEquals(taskListName1, taskListName2.getListName());
 
         //CleanUp
-        taskListDao.deleteAll();
+        taskListDao.delete(taskList);
     }
 
 }
