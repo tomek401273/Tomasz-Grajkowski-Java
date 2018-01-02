@@ -14,6 +14,7 @@ public class BoardTestSuite {
     public void testToDoList() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext(BoardConfig.class);
+
         Board board = context.getBean(Board.class);
         //When
         board.toDoList.addTask("play game");
