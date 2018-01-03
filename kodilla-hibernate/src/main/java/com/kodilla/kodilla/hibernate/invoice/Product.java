@@ -8,9 +8,6 @@ import javax.validation.constraints.NotNull;
 public class Product {
     private int id;
     private String name;
-    Item item;
-
-
 
     public Product() {
     }
@@ -32,21 +29,11 @@ public class Product {
         return name;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ITEM_ID")
-    public Item getItem() {
-        return item;
-    }
-
     private void setId(int id) {
         this.id = id;
     }
 
     private void setName(String name) {
         this.name = name;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 }

@@ -4,6 +4,7 @@ import com.kodilla.kodilla.hibernate.task.Task;
 import com.kodilla.kodilla.hibernate.task.TaskFinancialDetails;
 import com.kodilla.kodilla.hibernate.task.dao.TaskDao;
 import com.kodilla.kodilla.hibernate.tasklist.TaskList;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,11 +25,19 @@ public class TaskListDaoTestSuite {
     TaskDao taskDao;
 
     private static final String LISTNAME= "toDoFirst";
+    private static final String DESCRIPTION ="taskToDoFirstOtherTasks";
+    @After
+    public void testDelete() {
+       List<TaskList> taskListList = taskListDao.findByListName(LISTNAME);
+       taskListDao.delete(taskListList);
+
+
+    }
 
     @Test
     public void testFindByListName() {
         //Given
-        TaskList taskList = new TaskList(LISTNAME, "taskToDoFirstOtherTasks");
+        TaskList taskList = new TaskList(LISTNAME, DESCRIPTION);
         int id = taskList.getId();
 
         //When
@@ -38,17 +47,19 @@ public class TaskListDaoTestSuite {
         String taskListName1= taskList.getListName();
         List<TaskList> checkTaskListName = taskListDao.findByListName(LISTNAME);
         TaskList taskListName2 = checkTaskListName.get(0);
+        Assert.assertEquals(taskListName1, taskListName2.getListName());
 
-        try{
-            Assert.assertEquals(taskListName1, taskListName2.getListName());
 
-        }catch (Exception e) {
-            System.out.println("Excepition: "+e);
-        }
-        finally {
-            //CleanUp
-            taskListDao.delete(taskList);
-        }
+//        try{
+//            Assert.assertEquals(taskListName1, taskListName2.getListName());
+//
+//        }catch (Exception e) {
+//            System.out.println("Excepition: "+e);
+//        }
+//        finally {
+//            //CleanUp
+//            taskListDao.delete(taskList);
+//        }
     }
 
     @Test
@@ -75,7 +86,6 @@ public class TaskListDaoTestSuite {
 
         //CleanUp
         taskListDao.delete(id);
-       // taskListDao.deleteAll();
     }
     @Test
     public void testNamedQueries() {
@@ -126,9 +136,6 @@ public class TaskListDaoTestSuite {
 
         }
     }
-    @Test
-    public void delete() {
-        taskListDao.deleteAll();
-        taskDao.deleteAll();
-    }
+
+
 }

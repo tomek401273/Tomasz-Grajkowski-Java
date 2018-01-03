@@ -13,15 +13,18 @@ import java.util.List;
 @Table(name = "ITEM")
 public class Item {
     private int id;
+    private Product product;
     private BigDecimal price;
     private int quantity;
     private BigDecimal value;
-    private List<Product> products = new ArrayList<>();
+    private Invoice invoice;
+
 
     public Item() {
     }
 
-    public Item( BigDecimal price, int quantity, BigDecimal value) {
+    public Item(Product product, BigDecimal price, int quantity, BigDecimal value) {
+        this.product = product;
         this.price = price;
         this.quantity = quantity;
         this.value = value;
@@ -34,29 +37,33 @@ public class Item {
     public int getId() {
         return id;
     }
+
     @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
 
-    @OneToMany(
-            targetEntity = Product.class,
-            mappedBy = "item",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    public List<Product> getProducts() {
-        return products;
-    }
     @Column(name = "QUANTITY")
     public int getQuantity() {
         return quantity;
     }
+
     @Column(name = "VALUE")
     public BigDecimal getValue() {
         return value;
     }
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "PRODUCT_ID")
+    public Product getProduct() {
+        return product;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="INVOICE_ID")
+    public Invoice getInvoice() {
+        return invoice;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -66,15 +73,19 @@ public class Item {
         this.price = price;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
     public void setValue(BigDecimal value) {
         this.value = value;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }
