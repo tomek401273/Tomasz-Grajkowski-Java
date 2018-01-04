@@ -24,13 +24,12 @@ public class TaskListDaoTestSuite {
     @Autowired
     TaskDao taskDao;
 
-    private static final String LISTNAME= "toDoFirst";
-    private static final String DESCRIPTION ="taskToDoFirstOtherTasks";
+    private static final String LISTNAME = "toDoFirst";
+    private static final String DESCRIPTION = "taskToDoFirstOtherTasks";
+
     @After
     public void testDelete() {
-       List<TaskList> taskListList = taskListDao.findByListName(LISTNAME);
-       taskListDao.delete(taskListList);
-
+        taskListDao.deleteAll();
     }
 
     @Test
@@ -43,22 +42,10 @@ public class TaskListDaoTestSuite {
         taskListDao.save(taskList);
 
         //Then
-        String taskListName1= taskList.getListName();
+        String taskListName1 = taskList.getListName();
         List<TaskList> checkTaskListName = taskListDao.findByListName(LISTNAME);
         TaskList taskListName2 = checkTaskListName.get(0);
         Assert.assertEquals(taskListName1, taskListName2.getListName());
-
-
-//        try{
-//            Assert.assertEquals(taskListName1, taskListName2.getListName());
-//
-//        }catch (Exception e) {
-//            System.out.println("Excepition: "+e);
-//        }
-//        finally {
-//            //CleanUp
-//            taskListDao.delete(taskList);
-//        }
     }
 
     @Test
@@ -82,10 +69,8 @@ public class TaskListDaoTestSuite {
 
         //Then
         Assert.assertNotEquals(0, id);
-
-        //CleanUp
-        taskListDao.delete(id);
     }
+
     @Test
     public void testNamedQueries() {
         //Given
@@ -124,17 +109,11 @@ public class TaskListDaoTestSuite {
         List<Task> enoughTimeTasks = taskDao.retriveTaskWithEnoughtTime();
         List<Task> dutrationLongerThan = taskDao.retriveTasksWithDurationLongerThan(6);
         //Then
-        try {
-            Assert.assertEquals(1, longTasks.size());
-            Assert.assertEquals(3, shortTasks.size());
-            Assert.assertEquals(3, enoughTimeTasks.size());
-            Assert.assertEquals(2, dutrationLongerThan.size());
-        } finally {
-           // CleanUp
-            taskListDao.delete(id);
 
-        }
+        Assert.assertEquals(1, longTasks.size());
+        Assert.assertEquals(3, shortTasks.size());
+        Assert.assertEquals(3, enoughTimeTasks.size());
+        Assert.assertEquals(2, dutrationLongerThan.size());
     }
-
-
 }
+
