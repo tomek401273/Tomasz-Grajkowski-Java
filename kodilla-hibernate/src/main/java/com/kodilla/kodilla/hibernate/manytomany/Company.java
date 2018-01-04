@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 @NamedNativeQuery(
         name= "Company.retriveCompanyBeginWithFirstLetter",
-        query = "SELECT * FROM companies WHERE company_name LIKE CONCAT(:MARK, '%')",
+        query = "SELECT * FROM companies WHERE substr(company_name, 1, 3) like :MARK",
         resultClass = Company.class
 )
 
