@@ -31,7 +31,6 @@ public class TaskListDaoTestSuite {
        List<TaskList> taskListList = taskListDao.findByListName(LISTNAME);
        taskListDao.delete(taskListList);
 
-
     }
 
     @Test
