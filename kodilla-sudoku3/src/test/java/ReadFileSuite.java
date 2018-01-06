@@ -6,6 +6,5 @@ public class ReadFileSuite {
     @Test
     public void readFile() {
 
-
     }
 }

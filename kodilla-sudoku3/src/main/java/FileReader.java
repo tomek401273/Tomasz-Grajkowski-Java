@@ -17,8 +17,10 @@ public class FileReader {
     List<String> choosenGrid = new ArrayList<>();
 
     public void readFile() {
-        File file = new File("/home/tomasz/Dokumenty/Development/kodilla-course/kodilla-sudoku3/src/main/resources/file/text.txt");
-        Path path= Paths.get(file.getPath());
+
+        File file = new File(System.getProperty("sudokuPath"));
+
+        Path path = Paths.get(file.getPath());
 
         try {
             allGrids = Files.readAllLines(path);
@@ -28,6 +30,7 @@ public class FileReader {
             System.out.println(e);
         }
     }
+
     public List<String> chooseGrid(String grid) {
         grid = "Grid " + grid;
 
@@ -49,7 +52,7 @@ public class FileReader {
     }
 
     public int[][] parseData(List<String> grid) {
-        int [][] exportedData= new int[9][9];
+        int[][] exportedData = new int[9][9];
         String row;
         int value;
 
@@ -60,8 +63,8 @@ public class FileReader {
             row = grid.get(i);
 
             for (int j = 0; j < 9; j++) {
-                value = Integer.parseInt(row.substring(j,j+1));
-                exportedData[i][j]=value;
+                value = Integer.parseInt(row.substring(j, j + 1));
+                exportedData[i][j] = value;
             }
         }
         return exportedData;
