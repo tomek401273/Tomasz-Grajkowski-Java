@@ -26,6 +26,7 @@ public class SandStorageTestSuite {
         BigDecimal expectedSand = new BigDecimal("211111110903703703670");
         Assert.assertEquals(expectedSand, totalSand);
     }
+
     @Test
     public void testGetSandBeansQuantityWithReduce() {
         //Given
@@ -36,8 +37,9 @@ public class SandStorageTestSuite {
 
         //When
         BigDecimal totalSand = continents.stream()
-                .map(SadStorage ::getSandBeansQuantity)
+                .map(SadStorage::getSandBeansQuantity)
                 .reduce(BigDecimal.ZERO, (sum, current) -> sum = sum.add(current));
+
 
         //Then
         BigDecimal expectedSand = new BigDecimal("211111110903703703670");
