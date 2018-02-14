@@ -6,10 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NamedQuery(
-        name= "Employee.retriveNameEmployeEqualLastname",
+        name = "Employee.retriveNameEmployeEqualLastname",
         query = "FROM Employee WHERE LASTNAME = :LASTNAME"
 )
 
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Employee.retriveEmployeeWithFirstNameContainLetters",
+                query = "SELECT * FROM employees WHERE firstname LIKE concat('%',:LETTERS,'%')",
+                resultClass = Employee.class
+        ),
+        @NamedNativeQuery(
+                name = "Employee.retrieveEmployeeWithLastNameContainsLetters",
+                query = "SELECT * FROM employees WHERE lastname LIKE concat('%',:LETTERS,'%')",
+                resultClass = Employee.class
+        )
+})
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
@@ -45,10 +57,11 @@ public class Employee {
     public String getLastname() {
         return lastname;
     }
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "JOIN_COMPANY_EMPLOYEE",
-            joinColumns = {@JoinColumn(name = "EMPLOYEE_ID",referencedColumnName = "EMPLOYEE_ID")},
+            joinColumns = {@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "EMPLOYEE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "COMPANY_ID", referencedColumnName = "COMPANY_ID")}
     )
     public List<Company> getCompanies() {
@@ -69,5 +82,13 @@ public class Employee {
 
     public void setCompanies(List<Company> companies) {
         this.companies = companies;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '}';
     }
 }

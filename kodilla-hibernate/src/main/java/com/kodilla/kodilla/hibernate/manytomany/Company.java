@@ -4,11 +4,19 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@NamedNativeQuery(
-        name= "Company.retriveCompanyBeginWithFirstLetter",
-        query = "SELECT * FROM companies WHERE substr(company_name, 1, 3) like :MARK",
-        resultClass = Company.class
-)
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name= "Company.retriveCompanyBeginWithFirstLetter",
+                query = "SELECT * FROM companies WHERE substr(company_name, 1, 3) like :MARK",
+                resultClass = Company.class
+        ),
+        @NamedNativeQuery(
+                name= "Company.retriveCompanyWithContainLetter",
+                query = "SELECT * FROM companies WHERE company_name like concat('%',:LETTER,'%')",
+                resultClass = Company.class
+        )
+})
+
 
 @Entity
 @Table(name = "COMPANIES")
@@ -53,5 +61,13 @@ public class Company {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name +
+                '}';
     }
 }

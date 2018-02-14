@@ -1,7 +1,9 @@
-package com.kodilla.kodilla.hibernate.manytomany.dao;
+package com.kodilla.kodilla.hibernate.manytomany;
 
 import com.kodilla.kodilla.hibernate.manytomany.Company;
 import com.kodilla.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.kodilla.hibernate.manytomany.dao.CompanyDao;
+import com.kodilla.kodilla.hibernate.manytomany.dao.EmployeeDao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,12 +63,44 @@ public class CompanyDaoTestSuite {
     @Test
     public void testHowManyEmployEqualsSmith() {
         List<Employee> employees= employeeDao.retriveNameEmployeEqualLastname("Smith");
+
         Assert.assertEquals(1,employees.size());
     }
 
     @Test
     public void testHowManyCompaniesBeginNameWiithSof() {
         List<Company> companyList = companyDao.retriveCompanyBeginWithFirstLetter("Sof");
+        for (Company company: companyList) {
+            System.out.println(company.getName());
+        }
         Assert.assertEquals(1, companyList.size());
     }
+
+
+    @Test
+    public void testHowManyCompaniesBeginNameWiithSof2() {
+//        List<Company> companyList = companyDao.retriveCompanyWithContainLetter("%a%");
+        List<Company> companyList = companyDao.retriveCompanyWithContainLetter("a");
+
+        for (Company company: companyList) {
+            System.out.println(company.getName());
+        }
+        Assert.assertEquals(3, companyList.size());
+    }
+//    @Test
+//    public void testHowManyEmployWithFragmentName() {
+//        List<Employee> employees = employeeDao.retriveEmploye("LASTNAME", "Smith");
+//        System.out.println("Employy: " + employees.size());
+////        for (Employee employee: employees) {
+////            System.out.println(employee.toString());
+////        }
+//    }
+//    @Test
+//    public void testHowManyEmployWithFragmentName2() {
+//        List<Employee> employees = employeeDao.retriveEmployeEqualsSmith("lastname");
+//        System.out.println("Employy: " + employees.size());
+////        for (Employee employee: employees) {
+////            System.out.println(employee.toString());
+////        }
+//    }
 }
