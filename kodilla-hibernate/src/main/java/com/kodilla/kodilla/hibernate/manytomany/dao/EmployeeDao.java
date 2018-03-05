@@ -6,16 +6,22 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface EmployeeDao extends CrudRepository<Employee, Integer> {
     @Query
     List<Employee> retriveNameEmployeEqualLastname(@Param("LASTNAME") String lastname);
 
-    @Query(nativeQuery = true)
-    List<Employee> retriveEmployeeWithFirstNameContainLetters(@Param("LETTERS") String letters);
+//    @Query(nativeQuery = true)
+//    List<Employee> retriveEmployeeWithFirstNameContainLetters(@Param("LETTERS") String letters);
+//
+//    @Query(nativeQuery = true)
+//    List<Employee> retrieveEmployeeWithLastNameContainsLetters(@Param("LETTERS") String letters);
 
     @Query(nativeQuery = true)
-    List<Employee> retrieveEmployeeWithLastNameContainsLetters(@Param("LETTERS") String letters);
+    Set<Employee> retriveEmployeeWithFirstNameContainLetters(@Param("LETTERS") String letters);
 
+    @Query(nativeQuery = true)
+    Set<Employee> retrieveEmployeeWithLastNameContainsLetters(@Param("LETTERS") String letters);
 
 }

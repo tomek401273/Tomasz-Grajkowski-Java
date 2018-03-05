@@ -12,10 +12,11 @@ import java.util.List;
         ),
         @NamedNativeQuery(
                 name= "Company.retriveCompanyWithContainLetter",
-                query = "SELECT * FROM companies WHERE company_name like concat('%',:LETTER,'%')",
+                query = "SELECT * FROM companies WHERE company_name LIKE concat('%',:LETTER,'%')",
                 resultClass = Company.class
         )
 })
+
 
 
 @Entity
