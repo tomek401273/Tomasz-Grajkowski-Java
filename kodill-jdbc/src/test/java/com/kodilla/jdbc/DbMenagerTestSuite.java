@@ -12,19 +12,19 @@ public class DbMenagerTestSuite {
     public void testConnect() throws SQLException {
         //Given
         //When
-        DbManager dbManager = DbManager.getInstance();
+        DbMenager dbMenager = DbMenager.getInstance();
         //Then
-        Assert.assertNotNull(dbManager.getConnection());
+        Assert.assertNotNull(dbMenager.getConnection());
     }
 
     @Test
     public void testSelectUsers() throws SQLException {
         //Given
-        DbManager dbManager = DbManager.getInstance();
+        DbMenager dbMenager = DbMenager.getInstance();
 
         //When
         String sqlQuery = "SELECT * FROM USERS;";
-        Statement statement = dbManager.getConnection().createStatement();
+        Statement statement = dbMenager.getConnection().createStatement();
         ResultSet rs = statement.executeQuery(sqlQuery);
 
         //Then
@@ -43,14 +43,14 @@ public class DbMenagerTestSuite {
     @Test
     public void testSelectUsersAndPosts() throws SQLException {
         //Given
-        DbManager dbManager = DbManager.getInstance();
+        DbMenager dbMenager = DbMenager.getInstance();
 
         //When
         String sqlQQuery =
                 "SELECT U.ID, U.FIRSTNAME, U.LASTNAME, COUNT(*)" +
                         " AS POST FROM POSTS P, USERS U WHERE U.ID = " +
                         "P.USER_ID GROUP BY P.USER_ID HAVING COUNT(*) >2;";
-        Statement statement = dbManager.getConnection().createStatement();
+        Statement statement = dbMenager.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sqlQQuery);
 
         //Then
