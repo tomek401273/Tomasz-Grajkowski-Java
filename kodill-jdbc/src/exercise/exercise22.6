@@ -1,0 +1,25 @@
+EXPLAIN SELECT COUNT(*) FROM BOOKS;
+id,  select_type, table,   partitions, type,   possible_keys, key,      key_len, ref,  rows, filtered, Extra
+'1', 'SIMPLE',    'BOOKS', NULL,      'index', NULL, '        PRIMARY', '4',     NULL, '5',  '100.00', 'Using index'
+
+CREATE INDEX BOOKS_TITLE ON BOOKS (TITLE);
+
+EXPLAIN SELECT COUNT(*) FROM BOOKS;
+# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
+'1', 'SIMPLE', 'BOOKS', NULL, 'index', NULL, 'BOOKS_TITLE', '257', NULL, '5', '100.00', 'Using index'
+
+EXPLAIN SELECT COUNT(*) FROM BOOKS WHERE TITLE = 'STARTREK';
+# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
+'1', 'SIMPLE', 'BOOKS', NULL, 'ref', 'BOOKS_TITLE', 'BOOKS_TITLE', '257', 'const', '1', '100.00', 'Using index'
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+EXPLAIN SELECT COUNT(*) FROM READERS WHERE FIRSTNAME = 'John';
+# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
+'1', 'SIMPLE', 'READERS', NULL, 'ALL', NULL, NULL, NULL, NULL, '5', '20.00', 'Using where'
+
+CREATE INDEX READERS_NAME ON READERS (FIRSTNAME, LASTNAME);
+
+EXPLAIN SELECT COUNT(*) FROM BOOKS WHERE TITLE = 'STARTREK';
+
+# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
+'1', 'SIMPLE', 'BOOKS', NULL, 'ref', 'BOOKS_TITLE', 'BOOKS_TITLE', '257', 'const', '1', '100.00', 'Using index'
