@@ -12,4 +12,5 @@ include 'kodilla-sudoku2'
 include 'kodill-sudoku-3'
 include 'kodilla-sudoku3'
 include 'Exercise-Exception'
+include 'kodilla-testing2'
 
