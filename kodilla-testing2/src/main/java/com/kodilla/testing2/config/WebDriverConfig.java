@@ -7,7 +7,7 @@ public class WebDriverConfig {
     public final static String CHROME = "CHROME_DRIVER";
 
     public static WebDriver getDriver(final String driver) {
-        System.setProperty("webdriver.chrome.driver", "/home/tomasz/Dokumenty/Development/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "./kodilla-testing2/src/main/java/com/kodilla/testing2/config/chromedriver");
 
         if (driver.equals(CHROME)) {
             return new ChromeDriver();
