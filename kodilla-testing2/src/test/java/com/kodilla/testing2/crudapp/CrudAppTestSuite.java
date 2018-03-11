@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,6 +63,7 @@ public class CrudAppTestSuite {
     public void shouldCrateTrelloCard() throws InterruptedException {
         String taskName = createCrudAppTestTask();
         sendTestTaskToTrello(taskName);
+        alertHandling();
         removeTaskFromCrudApp(taskName);
         Assert.assertTrue(checkTaskExistsInTrello(taskName));
     }
@@ -106,11 +108,16 @@ public class CrudAppTestSuite {
         Thread.sleep(5000);
     }
 
+    private void alertHandling() {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+
     private void removeTaskFromCrudApp(String taskName) throws InterruptedException {
         driver.findElements(By.xpath("//form[@class=\"datatable__row\"]")).stream()
                 .filter(anyForm ->
                         anyForm.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]"))
-                .getText().equals(taskName))
+                                .getText().equals(taskName))
                 .forEach(theForm -> {
                     WebElement removeButton = theForm.findElement(By.xpath(".//button[4]"));
                     removeButton.click();
