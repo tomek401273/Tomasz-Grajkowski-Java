@@ -1,0 +1,63 @@
+ALTER TABLE BOOKS
+  ADD BESTSELLER BOOLEAN;
+DROP FUNCTION IF EXISTS SetBestseller;
+
+DELIMITER $$
+
+CREATE FUNCTION SetBestseller(amount INT)
+  RETURNS BOOLEAN
+  BEGIN
+    DECLARE result BOOLEAN DEFAULT FALSE;
+
+    IF amount > 1
+    THEN
+      SET result = TRUE;
+
+    ELSE
+      SET result = FALSE;
+    END IF;
+
+    RETURN result;
+  END $$
+
+DELIMITER ;
+
+SELECT SetBestseller(3);
+DROP PROCEDURE IF EXISTS UpdateBestsellers;
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateBestsellers()
+  BEGIN
+    DECLARE BORROWED INT;
+    DECLARE BO_ID INT;
+    DECLARE FINISHED INT DEFAULT 0;
+    DECLARE ALL_BOOKS CURSOR FOR SELECT BOOK_ID
+                                 FROM BOOKS;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET FINISHED = 1;
+
+    OPEN ALL_BOOKS;
+    WHILE (FINISHED = 0) DO
+      FETCH ALL_BOOKS
+      INTO BO_ID;
+
+      IF (FINISHED = 0)
+      THEN
+        SELECT COUNT(*)
+        FROM RENTS
+        WHERE BOOK_ID = BO_ID
+        INTO BORROWED;
+
+        UPDATE BOOKS
+        SET BESTSELLER = SetBestseller(BORROWED)
+        WHERE BOOK_ID = BO_ID;
+        COMMIT;
+      END IF;
+
+    END WHILE;
+    CLOSE ALL_BOOKS;
+  END $$
+
+DELIMITER ;
+
+CALL UpdateBestsellers;
